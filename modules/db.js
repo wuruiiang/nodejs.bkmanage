@@ -30,7 +30,7 @@ exports.find=function (_tablename,_json,callback) {
     __connectDB(function (client) {
         const db=client.db(_DBName);
 
-        var result=db.collection('user').find(_json);
+        var result=db.collection(_tablename).find(_json);
 
         result.toArray(function (error,data) {
             //关闭数据库
@@ -54,11 +54,15 @@ exports.insert=function (_tablename,_json,callback) {
     })
 }
 
-//修改
+/*
+    修改:
+        _value:需要设置的值
+        _json:设置值的查询条件
+*/
 exports.update=function (_tablename,_value,_json,callback) {
     __connectDB(function (client) {
         const db=client.db(_DBName);
-        var result=db.collection(_tablename).updateOne(_value,{$set:_json},function (error,data) {
+        var result=db.collection(_tablename).updateOne(_json,{$set:_value},function (error,data) {
             //关闭数据库
             client.close();
             //执行回调函数

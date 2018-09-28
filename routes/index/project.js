@@ -1,9 +1,16 @@
 var express=require('express');
 
+var _db=require('../../modules/db');
+
 var router=new express.Router();
 
 router.get('/',function (req,res) {
-    res.send('project page in index');
+    _db.find('project',{},function (err,data) {
+        res.render('project/index',{
+            list:data
+        });
+    })
+
 })
 
 router.get('/add',function (req,res) {

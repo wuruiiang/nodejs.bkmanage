@@ -8,7 +8,7 @@ router.use('/project',project);
 
 
 router.get('/',function (req,res) {
-    res.send('index page');
+    res.redirect('/index/project');
 })
 
 
